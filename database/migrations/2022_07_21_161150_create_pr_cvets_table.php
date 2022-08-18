@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreignId('pr_collection_id')->constrained();
             $table->text('description')->nullable();
             $table->string('color')->nullable();
+            $table->json('specs')->nullable();
+            $table->boolean('published')->default(false);
             $table->timestamps();
         });
     }

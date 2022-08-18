@@ -9,6 +9,14 @@ class PrCollection extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'price',
+        'description',
+        'image',
+        'published'
+    ];
+
     public function pr_cvets()
     {
         return $this->hasMany(PrCvet::class);

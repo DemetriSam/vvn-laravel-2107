@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+use App\Http\Controllers\PrCollectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/pr_collections', [PrCollectionController::class, 'index'])->name('pr_collection.index');
+
+Route::get('/pr_collections/create', [PrCollectionController::class, 'create'])->name('pr_collection.create');
+Route::post('/pr_collections', [PrCollectionController::class, 'store'])->name('pr_collection.store');

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->float('price');
             $table->json('specs')->nullable();
-            $table->boolean('published');
+            $table->boolean('published')->default(false);
             $table->timestamps();
         });
     }
