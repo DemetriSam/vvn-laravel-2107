@@ -21,4 +21,9 @@ class PrCvet extends Model
     {
         return $this->belongsTo(PrCollection::class);
     }
+
+    public function image()
+    {
+        return $this->morphOne(\App\Models\PrImage::class, 'imageable');
+    }
 }

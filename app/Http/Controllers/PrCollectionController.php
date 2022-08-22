@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PrCollection;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PrCollectionController extends Controller
 {
@@ -37,15 +39,29 @@ class PrCollectionController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => ['required', 'string']
         ]);
+
 
         $pr_collection = \App\Models\PrCollection::create ([
             'title' => $request->title,
             'description' => $request->description,
             'price' => $request->price,
         ]);
+
+        $path = $request->file('image')->store('pr_collection_images', 'public');
+        // доступ по asset('storage/' . $path)
+        
+        $pr_image = \App\Models\PrImage::create ([
+            'original' => $path,
+            'imageable_id' => $pr_collection->id,
+            'imageable_type' => \App\Models\PrCollection::class,
+        ]);
+
+        $asset = asset('storage/' . $pr_image->original);
+        return '<img src="' . $asset . '" />';
 
         return redirect()->route('pr_collection.index');
 

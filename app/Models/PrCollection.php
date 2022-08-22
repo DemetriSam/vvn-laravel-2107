@@ -13,12 +13,17 @@ class PrCollection extends Model
         'title',
         'price',
         'description',
-        'image',
+        'images',
         'published'
     ];
 
     public function pr_cvets()
     {
         return $this->hasMany(PrCvet::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(\App\Models\PrImage::class, 'imageable');
     }
 }

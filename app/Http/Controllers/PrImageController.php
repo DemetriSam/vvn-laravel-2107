@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PrImage;
 use Illuminate\Http\Request;
-use App\Models\PrCvet;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 
-class PrCvetController extends Controller
+class PrImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class PrCvetController extends Controller
      */
     public function index()
     {
-        $cvets = PrCvet::all();
-        return view('pr_cvet.index', compact('cvets'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class PrCvetController extends Controller
      */
     public function create()
     {
-        return view('pr_cvet.create');
+        //
     }
 
     /**
@@ -38,38 +35,27 @@ class PrCvetController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'string']
-        ]);
-
-        $pr_cvet = \App\Models\PrCvet::create ([
-            'title' => $request->title,
-            'description' => $request->description,
-            'pr_collection_id' => $request->pr_collection_id
-        ]);
-
-        return redirect()->route('pr_cvet.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PrImage  $prImage
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PrImage $prImage)
     {
-        $cvet = PrCvet::find($id);
-        return view('pr_cvet.show', compact('cvet'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\PrImage  $prImage
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PrImage $prImage)
     {
         //
     }
@@ -78,10 +64,10 @@ class PrCvetController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\PrImage  $prImage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PrImage $prImage)
     {
         //
     }
@@ -89,10 +75,10 @@ class PrCvetController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\PrImage  $prImage
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PrImage $prImage)
     {
         //
     }
