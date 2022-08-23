@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pr_images', function (Blueprint $table) {
             $table->id();
-            $table->string('original');
+            $table->string('orig_img');
             $table->foreignId('imageable_id')->nullable();
             $table->string('imageable_type')->nullable();
             $table->json('resizes')->nullable();

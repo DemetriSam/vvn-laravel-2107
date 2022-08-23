@@ -24,7 +24,7 @@ class PrImageController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
