@@ -22,8 +22,8 @@ class PrCollection extends Model
         return $this->hasMany(PrCvet::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->morphOne(\App\Models\PrImage::class, 'imageable');
+        return $this->morphMany(\App\Models\PrImage::class, 'imageable');
     }
 }

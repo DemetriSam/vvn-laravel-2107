@@ -17,6 +17,8 @@ class PrImage extends Model
         'imageable_type'
     ];
 
+    public $pr_image_resizes = [];
+
 
 
     /**
@@ -29,6 +31,11 @@ class PrImage extends Model
 
     public function make_resizes($sizes, $toReplace = false)
     {
+
+        if(gettype($sizes) === 'object') {
+            $sizes = $sizes->resizes;
+        }
+
         $image = Image::make(Storage::path($this->orig_img));
 
         [$dir_path, $filename_body, $filename_ext] = $this->map_filepath($this->orig_img);
@@ -46,16 +53,20 @@ class PrImage extends Model
             $resize_format = $width . 'x' . $height;
 
             if(!collect($this->resizes)->groupBy('format')->has($resize_format) or $toReplace) {
-                $resize_path = Storage::disk('public')->path($dir_path) . $filename_body . '_' . $resize_format . '.' . $filename_ext;
+                $resize_file_name = $filename_body . '_' . $resize_format . '.' . $filename_ext;
+                
+                $full_path = Storage::disk('public')->path($dir_path) . $resize_file_name;
 
                 $resize->save(
-                    $resize_path,
+                    $full_path,
                     100
                 );
+
+                $short_path = $dir_path . $resize_file_name;
     
                 $fordb = (object) [
                     'format' => $resize_format,
-                    'file' => $resize_path
+                    'file' => $short_path
                 ];
     
                 $resizes[] = $fordb;
@@ -89,5 +100,21 @@ class PrImage extends Model
         $dir_path = implode('/', $straight) . '/';
 
         return [$dir_path, $filename_body, $filename_ext];
+    }
+
+    public function get_resize($size, $get_path_in_filesystem = false)
+    {
+
+        $resizes = json_decode($this->resizes);
+
+        $short_path = collect($resizes)->firstWhere('format', $size)->file;
+        
+        if ($get_path_in_filesystem) {    
+            return Storage::disk('public')->path($short_path);
+            
+        }
+
+        return Storage::disk('public')->url($short_path);
+
     }
 }

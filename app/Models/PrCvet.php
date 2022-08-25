@@ -12,9 +12,19 @@ class PrCvet extends Model
     protected $fillable = [
         'title',
         'description',
-        'image',
+        'images',
         'published',
         'pr_collection_id'
+    ];
+
+    public $resizes = [
+        [574, 574],
+        [1148, 1148],
+        [828, 1400],
+        [414, 700],
+        [320, 320],
+        [640, 640],
+        [325, 325]
     ];
 
     public function pr_collection()
@@ -22,8 +32,8 @@ class PrCvet extends Model
         return $this->belongsTo(PrCollection::class);
     }
 
-    public function image()
+    public function images()
     {
-        return $this->morphOne(\App\Models\PrImage::class, 'imageable');
+        return $this->morphMany(\App\Models\PrImage::class, 'imageable');
     }
 }

@@ -14,6 +14,9 @@ class PrImageTest extends TestCase
      *
      * @return void
      */
+
+    protected $pr_image;
+
     public function test_example()
     {
         $response = $this->get('/');
@@ -31,12 +34,19 @@ class PrImageTest extends TestCase
 
         $pr_image->make_resizes([
             [300, 300],
-            [400, 600]
+            [400, 600],
+            [500, 100]
         ]);
          
         collect(json_decode($pr_image->resizes))->dump();
 
         $pr_image->save();
+
+        $this->pr_image = $pr_image;
+
+
+        $file_path = 'pr_cvet_images/cPUkDo9CtpCTHRoPsU3WC7XMXbiSPjYN6HlYybVL.jpg';
+        $pr_image = PrImage::create(['orig_img' => $file_path]);
 
         $pr_image->make_resizes([
             [300, 300],
@@ -45,5 +55,24 @@ class PrImageTest extends TestCase
         ]);
 
         collect(json_decode($pr_image->resizes))->dump();
+
+        $pr_image->save();
+
+    }
+
+    /**
+     * @group mytests
+     */
+    public function test_get_resize()
+    {
+
+        $this->test_make_resizes();
+
+        $result = $this->pr_image->get_resize('300x300');
+        print_r($result);
+
+        $get_path_in_filesystem = true;
+        $result = $this->pr_image->get_resize('300x300', $get_path_in_filesystem);
+        $this->assertFileExists($result);
     }
 }

@@ -100,7 +100,25 @@
                                     </div>
                                     <div class="stock-status">Много на складе</div>
                                 </div>
-                                <img src="http://localhost/img/gallery/DG 8002 hor.jpg" alt="" typeof="foaf:Image">
+                                <picture>
+                                    <source 
+                                        srcset="
+                                            {{ $pr_cvet->image->get_resize('574x574') }} 1x,
+                                            {{ $pr_cvet->image->get_resize('1148x1148') }} 2x
+                                        " 
+                                        media="all and (min-width: 574px)" 
+                                        type="image/jpeg" 
+                                    />
+                                    <source 
+                                        srcset="
+                                            {{ $pr_cvet->image->get_resize('414x700') }} 1x,
+                                            {{ $pr_cvet->image->get_resize('828x1400') }} 1.5x,
+                                            {{ $pr_cvet->image->get_resize('828x1400') }} 2x
+                                        " 
+                                        type="image/jpeg" 
+                                    />                 
+                                    <img src="{{ $pr_cvet->get_resize('325x325') }}" />
+                                </picture>
                                 <div class="gallery__sharing sharing">
                                     <div class="sharing__wrapper">
                                         <div class="sharing__icons">

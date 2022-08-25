@@ -48,6 +48,23 @@ class PrCvetController extends Controller
             'pr_collection_id' => $request->pr_collection_id
         ]);
 
+        $images = $request->file('images');
+
+        if($request->hasFile('images')) {
+            foreach ($images as $image) {
+                $path = $image->store('pr_cvet_images');
+                $pr_image = \App\Models\PrImage::create ([
+                    'orig_img' => $path,
+                    'imageable_id' => $pr_cvet->id,
+                    'imageable_type' => \App\Models\PrCvet::class,
+                ]);
+
+                $pr_image->make_resizes($pr_cvet);
+            }
+        }
+
+
+
         return redirect()->route('pr_cvet.index');
     }
 
@@ -59,8 +76,8 @@ class PrCvetController extends Controller
      */
     public function show($id)
     {
-        $cvet = PrCvet::find($id);
-        return view('pr_cvet.show', compact('cvet'));
+        $pr_cvet = PrCvet::find($id);
+        return view('pr_cvet.show', compact('pr_cvet'));
     }
 
     /**

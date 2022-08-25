@@ -1,6 +1,6 @@
 <x-guest-layout>
     <x-auth-card>
-        <form method="POST" action="{{ route('pr_cvet.store') }}">
+        <form method="POST" action="{{ route('pr_cvet.store') }} " enctype="multipart/form-data">
             @csrf
             <x-slot name="logo">
                 <a href="/">
@@ -35,9 +35,9 @@
             <div>
                 <x-label for="image" value="Изображение" />
 
-                <x-input id="image" class="block mt-1 w-full" type="file" name="image" :value="old('image')" required autofocus />
+                <x-input id="image" class="block mt-1 w-full" type="file" name="images[]" :value="old('image')" required multiple autofocus />
             </div>
-            
+
             <div class="flex items-center justify-end mt-4">
                 <x-button class="ml-3">
                     <p>Submit</p>
