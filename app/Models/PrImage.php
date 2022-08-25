@@ -27,7 +27,7 @@ class PrImage extends Model
         return $this->morphTo();
     }
 
-    public function make_resizes($sizes = [])
+    public function make_resizes($sizes, $toReplace = false)
     {
         $image = Image::make(Storage::path($this->orig_img));
 
@@ -44,27 +44,27 @@ class PrImage extends Model
             $resize->fit($width, $height);
             
             $resize_format = $width . 'x' . $height;
-            $resize_path = Storage::disk('public')->path($dir_path) . $filename_body . '_' . $resize_format . '.' . $filename_ext;
 
-            $resize->save(
-                $resize_path,
-                100
-            );
+            if(!collect($this->resizes)->groupBy('format')->has($resize_format) or $toReplace) {
+                $resize_path = Storage::disk('public')->path($dir_path) . $filename_body . '_' . $resize_format . '.' . $filename_ext;
 
-            $fordb = [
-                'format' => $resize_format,
-                'file' => $resize_path
-            ];
+                $resize->save(
+                    $resize_path,
+                    100
+                );
+    
+                $fordb = (object) [
+                    'format' => $resize_format,
+                    'file' => $resize_path
+                ];
+    
+                $resizes[] = $fordb;
+            }
 
-            $resizes[] = $fordb;
         }
-
-        $this->saveResizes($resizes);
-    }
-
-    public function saveResizes($resizes)
-    {
         
+        $this->resizes = collect($resizes)->toJson();
+
     }
 
     public function map_filepath($filepath)
