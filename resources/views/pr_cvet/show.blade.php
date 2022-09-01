@@ -100,6 +100,7 @@
                                     </div>
                                     <div class="stock-status">Много на складе</div>
                                 </div>
+                                @if($pr_cvet->image)
                                 <picture>
                                     <source 
                                         srcset="
@@ -119,6 +120,7 @@
                                     />                 
                                     <img src="{{ $pr_cvet->get_resize('325x325') }}" />
                                 </picture>
+                                @endif
                                 <div class="gallery__sharing sharing">
                                     <div class="sharing__wrapper">
                                         <div class="sharing__icons">
