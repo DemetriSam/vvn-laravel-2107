@@ -38,7 +38,7 @@ class PrImage extends Model
 
         $image = Image::make(Storage::path($this->orig_img));
 
-        [$dir_path, $filename_body, $filename_ext] = $this->map_filepath($this->orig_img);
+        [$dir_path, $filename_body, $filename_ext] = $this->parse_filepath($this->orig_img);
 
         $resizes = [];
 
@@ -78,7 +78,7 @@ class PrImage extends Model
 
     }
 
-    public function map_filepath($filepath)
+    public function parse_filepath($filepath)
     {
         $members = explode('/', $filepath);
         $reversed = array_reverse($members);
@@ -102,12 +102,21 @@ class PrImage extends Model
         return [$dir_path, $filename_body, $filename_ext];
     }
 
+    /**
+     * $zize - это строка типа 300x300
+     */
     public function get_resize($size, $get_path_in_filesystem = false)
     {
 
         $resizes = json_decode($this->resizes);
 
-        $short_path = collect($resizes)->firstWhere('format', $size)->file;
+        $proper = collect($resizes)->firstWhere('format', $size);
+
+        if ($proper) {
+            $short_path = $proper->file;
+        } else {
+            return;
+        }
         
         if ($get_path_in_filesystem) {    
             return Storage::disk('public')->path($short_path);

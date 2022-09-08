@@ -25,7 +25,7 @@ class PrImageTest extends TestCase
     }
 
     /**
-     * @group mytests
+     * @group pr_image_tests
      */
     public function test_make_resizes()
     {
@@ -44,24 +44,10 @@ class PrImageTest extends TestCase
 
         $this->pr_image = $pr_image;
 
-
-        $file_path = 'pr_cvet_images/cPUkDo9CtpCTHRoPsU3WC7XMXbiSPjYN6HlYybVL.jpg';
-        $pr_image = PrImage::create(['orig_img' => $file_path]);
-
-        $pr_image->make_resizes([
-            [300, 300],
-            [400, 600],
-            [500, 100]
-        ]);
-
-        collect(json_decode($pr_image->resizes))->dump();
-
-        $pr_image->save();
-
     }
 
     /**
-     * @group mytests
+     * @group pr_image_tests
      */
     public function test_get_resize()
     {
@@ -75,4 +61,6 @@ class PrImageTest extends TestCase
         $result = $this->pr_image->get_resize('300x300', $get_path_in_filesystem);
         $this->assertFileExists($result);
     }
+
+    
 }

@@ -60,6 +60,7 @@ class PrCvetController extends Controller
                 ]);
 
                 $pr_image->make_resizes($pr_cvet);
+                $pr_image->save();
             }
         }
 

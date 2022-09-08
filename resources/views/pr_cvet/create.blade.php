@@ -33,9 +33,9 @@
             <!-- Image -->
             
             <div>
-                <x-label for="image" value="Изображение" />
+                <x-label for="images" value="Изображение" />
 
-                <x-input id="image" class="block mt-1 w-full" type="file" name="images[]" :value="old('image')" required multiple autofocus />
+                <x-input id="images" class="block mt-1 w-full" type="file" name="images[]" :value="old('image')" required multiple autofocus />
             </div>
 
             <div class="flex items-center justify-end mt-4">

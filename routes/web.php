@@ -34,3 +34,7 @@ Route::get('/pr_cvets', [PrCvetController::class, 'index'])->name('pr_cvet.index
 Route::get('/pr_cvets/create', [PrCvetController::class, 'create'])->name('pr_cvet.create');
 Route::post('/pr_cvets', [PrCvetController::class, 'store'])->name('pr_cvet.store');
 Route::get('/pr_cvets/{id}', [PrCvetController::class, 'show'])->name('pr_cvet.show');
+
+Route::get('/test_swiper', function () {
+    return view('test_swiper');
+});
