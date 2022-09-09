@@ -18,13 +18,17 @@ class PrCvet extends Model
     ];
 
     public $resizes = [
-        [574, 574],
-        [1148, 1148],
-        [828, 1400],
-        [414, 700],
-        [320, 320],
-        [640, 640],
-        [325, 325]
+        ['product', 574, 574],
+        ['product', 689, 689],
+        ['product', 861, 861],
+        ['product', 1148, 1148],
+        ['product', 414, 700],
+        ['product', 621, 1050],
+        ['product', 828, 1400],
+        ['rec', 320, 320],
+        ['rec', 480, 480],
+        ['rec', 640, 640],
+        ['rec', 325, 325]
     ];
 
     public function pr_collection()

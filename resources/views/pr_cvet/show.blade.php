@@ -1,10 +1,5 @@
 <x-layout>
-<style>
-.swiper {
-  width: 1000px;
-  height: 1000px;
-}
-</style>
+
     <section class="product-card">
         <div class="product-card__items the-product" data-nid="59">
             <div class="product-card__item product-card__item_h1 h1 nodes__label">
@@ -37,7 +32,8 @@
                                     <source 
                                         srcset="
                                             {{ $image->get_resize('574x574') }} 1x,
-                                            {{ $image->get_resize('1148x1148') }} 1.5x
+                                            {{ $image->get_resize('689x689') }} 1.2x,
+                                            {{ $image->get_resize('861x861') }} 1.5x
                                         " 
                                         media="all and (min-width: 574px)" 
                                         type="image/jpeg" 
@@ -45,7 +41,7 @@
                                     <source 
                                         srcset="
                                             {{ $image->get_resize('414x700') }} 1x,
-                                            {{ $image->get_resize('828x1400') }} 1.5x,
+                                            {{ $image->get_resize('621x1050') }} 1.5x,
                                             {{ $image->get_resize('828x1400') }} 2x
                                         " 
                                         type="image/jpeg" 

@@ -43,12 +43,22 @@ class PrImage extends Model
         $resizes = [];
 
         foreach ($sizes as $size) {
-            $width = $size[0];
-            $height = $size[1];
-
+            $case = $size[0];
+            $width = $size[1];
+            $height = $size[2];
+            
             $resize = clone $image;
 
-            $resize->fit($width, $height);
+            if ($case === 'product') {
+                $resize->resize($width, $height, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+            } elseif ($case === 'rec') {
+                $resize->fit($width, $height);
+            } else {
+                $resize->fit($width, $height);
+            }
+            
             
             $resize_format = $width . 'x' . $height;
 
@@ -66,6 +76,7 @@ class PrImage extends Model
     
                 $fordb = (object) [
                     'format' => $resize_format,
+                    'case' => $case,
                     'file' => $short_path
                 ];
     

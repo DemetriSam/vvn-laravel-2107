@@ -27,15 +27,23 @@ class PrImageTest extends TestCase
     /**
      * @group pr_image_tests
      */
-    public function test_make_resizes()
+    public function make_resizes()
     {
         $file_path = 'pr_collection_images/0ZDCQaCozLUxjWAfOObxX20rIFbOlQN3W4FMFcSs.jpg';
         $pr_image = PrImage::create(['orig_img' => $file_path]);
 
         $pr_image->make_resizes([
-            [300, 300],
-            [400, 600],
-            [500, 100]
+            ['product', 574, 574],
+            ['product', 689, 689],
+            ['product', 861, 861],
+            ['product', 1148, 1148],
+            ['product', 414, 700],
+            ['product', 621, 1050],
+            ['product', 828, 1400],
+            ['rec', 320, 320],
+            ['rec', 480, 480],
+            ['rec', 640, 640],
+            ['rec', 325, 325]
         ]);
          
         collect(json_decode($pr_image->resizes))->dump();
@@ -52,13 +60,13 @@ class PrImageTest extends TestCase
     public function test_get_resize()
     {
 
-        $this->test_make_resizes();
+        $this->make_resizes();
 
-        $result = $this->pr_image->get_resize('300x300');
+        $result = $this->pr_image->get_resize('325x325');
         print_r($result);
 
         $get_path_in_filesystem = true;
-        $result = $this->pr_image->get_resize('300x300', $get_path_in_filesystem);
+        $result = $this->pr_image->get_resize('325x325', $get_path_in_filesystem);
         $this->assertFileExists($result);
     }
 
