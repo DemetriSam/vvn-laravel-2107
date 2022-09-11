@@ -1,5 +1,5 @@
 import './bootstrap';
-import './original_vvn_layout';
+import './src_js/app';
 
 import Alpine from 'alpinejs';
 

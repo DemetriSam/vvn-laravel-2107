@@ -13,7 +13,10 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
+                'resources/scss/style.scss',
+                'resources/js/src_js/files/dynamic-header.js',
+                'resources/js/src_js/files/functions.js',
+                'resources/js/src_js/libs/swiper-bundle.min.js',
                 'resources/js/app.js',
             ],
             refresh: true,
