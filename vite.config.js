@@ -14,7 +14,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/scss/style.scss',
-                'resources/js/src_js/files/dynamic-header.js',
                 'resources/js/src_js/files/functions.js',
                 'resources/js/src_js/libs/swiper-bundle.min.js',
                 'resources/js/app.js',
