@@ -33,7 +33,7 @@
 	<nav class="navbar navbar-dark bg-primary navbar-expand-lg" id="navbar-main">
 		<div class="header__container _container">
 			<div class="site-branding">
-				<a href="http://vse-v-nalichii.samartu2.beget.tech/ru" title="Главная" rel="home" class="navbar-brand">
+				<a href="{{ route('index') }}" title="Главная" rel="home" class="navbar-brand">
 					<img src="/img/icons/big_logo.png" alt="Главная" class="img-fluid d-inline-block align-top">
 					<div class="d-inline-block align-top site-name-slogan">
 						<p class="site-name">Всё в наличии</p>
@@ -49,14 +49,14 @@
 					<ul block="block-bootstrap-barrio-main-navigation row" class="clearfix nav navbar-nav menu__list">
 
 						<li class="nav-item menu__item _icon-Rectangle">
-							<a href="http://vse-v-nalichii.samartu2.beget.tech/ru/carpets" title="carpets"
+							<a href="{{ route('carpets') }}" title="carpets"
 								class="nav-link nav-link--ru-carpets" data-drupal-link-system-path="carpets">
 								Ковровые покрытия
 							</a>
 						</li>
 
 						<li class="nav-item menu__item">
-							<a href="http://vse-v-nalichii.samartu2.beget.tech/ru/cinovki"
+							<a href="{{ route('cinovki') }}"
 								class="nav-link`menu__link nav-link--ru-cinovki" data-drupal-link-system-path="cinovki">
 								Циновки из сизаля
 							</a>
@@ -100,22 +100,30 @@
 			</button>
 		</div>
 	</nav>
-	<div id="block-mytheme-breadcrumbs" class="contextual-region breadcrumb _container">
-		<nav role="navigation" aria-labelledby="system-breadcrumb" class="breadcrumb__body">
-			<!--<h2 id="system-breadcrumb" class="visually-hidden">Строка навигации</h2>-->
-			<ol class="breadcrumb__list">
-				<li class="breadcrumb__item">
-					<a href="/ru">Главная</a>
-				</li>
-				<li class="breadcrumb__item">
-					<a href="/ru">Ковровые покрытия</a>
-				</li>
-				<li class="breadcrumb__item">
-					<a href="/ru">Shycloud 13</a>
-				</li>
-			</ol>
-		</nav>
-	</div>
+	@if(Route::currentRouteName() !== 'index')
+		<div id="block-mytheme-breadcrumbs" class="contextual-region breadcrumb _container">
+			<nav role="navigation" aria-labelledby="system-breadcrumb" class="breadcrumb__body">
+				<!--<h2 id="system-breadcrumb" class="visually-hidden">Строка навигации</h2>-->
+				<ol class="breadcrumb__list">
+					<li class="breadcrumb__item">
+						<a href="/ru">Главная</a>
+					</li>
+					<li class="breadcrumb__item">
+						<a href="/ru">Ковровые покрытия</a>
+					</li>
+					<li class="breadcrumb__item">
+						<a href="/ru">Shycloud 13</a>
+					</li>
+				</ol>
+			</nav>
+		</div>
+	@else
+		<style>
+			.wrapper {
+				margin-top: -50px;
+			}
+		</style>
+	@endif
 	<div id="designer_button_mobile" class="call_designer_div _container designer_button_mobile">
 		<a href="#" class="call_designer button">Вызвать дизайнера на замер</a>
 	</div>

@@ -989,7 +989,7 @@ function addToCart_old(productButton, productId) {
 	}
 }
 
-var projectContext = 'production';
+var projectContext = 'local';
 
 function checkTheCart() {
 	var value = getCookie('favorites_cookie');
