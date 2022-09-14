@@ -163,18 +163,18 @@ if (iconMenu != null) {
 			iconMenu.classList.toggle("_active");
 			menuBody.classList.toggle("_active");
 			menuBody.style = `top: 0px`;
-
 		}
 	});
-	iconMenuClone.addEventListener("click", function (e) {
-		if (unlock) {
-			body_lock(delay);
-			iconMenuClone.classList.toggle("_active");
-			menuBody.classList.toggle("_active");
-			if (scrollY > 1) { menuBody.style = `top: ${scrollY}px`; }
-
-		}
-	});
+	if (iconMenuClone) {
+		iconMenuClone.addEventListener("click", function (e) {
+			if (unlock) {
+				body_lock(delay);
+				iconMenuClone.classList.toggle("_active");
+				menuBody.classList.toggle("_active");
+				if (scrollY > 1) { menuBody.style = `top: ${scrollY}px`; }
+			}
+		});
+	}
 };
 function menu_close() {
 	let iconMenu = document.querySelector(".icon-menu");
