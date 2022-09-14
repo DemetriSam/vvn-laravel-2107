@@ -14,7 +14,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/scss/style.scss',
-                'resources/js/src_js/libs/swiper-bundle.min.js',
+                'resources/js/swiper-bundle.js',
                 'resources/js/app.js',
             ],
             refresh: true,
